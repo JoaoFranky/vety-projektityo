@@ -1,0 +1,210 @@
+	<!DOCTYPE html>
+	<html lang="fi">
+	<head>
+		<link rel="stylesheet" href="vetykampanja.css">
+		<link rel="img" href="Punkaharju.jpg">
+		<meta charset="UTF-8">
+	  	<meta name="description" content="Hydrogen Campaign aimed for Finland">
+	  	<meta name="keywords" content="HTML,CSS">
+	  	<meta name="author" content="Joao Hämäläinen">
+	  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  	
+<!------------------------
+	Javascript
+------------------------->
+
+	<script>
+	/* When the user clicks on the button, 
+	toggle between hiding and showing the dropdown content */
+	function dropDownFunction() {
+	  document.getElementById("myDropdown").classList.toggle("show");
+	}
+
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(event) {
+	  if (!event.target.matches('.dropbtn')) {
+	    var dropdowns = document.getElementsByClassName("dropdown-content");
+	    var i;
+	    for (i = 0; i < dropdowns.length; i++) {
+	      var openDropdown = dropdowns[i];
+	      if (openDropdown.classList.contains('show')) {
+	        openDropdown.classList.remove('show');
+	      }
+	    }
+	  }
+	}
+
+	/* When the user clicks on the button, 
+	toggle between hiding and showing the dropdown content */
+	function barDropDownFunction() {
+	  document.getElementById("barmyDropdown").classList.toggle("barshow");
+	}
+
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(event) {
+	  if (!event.target.matches('.bardropbtn')) {
+	    var dropdowns = document.getElementsByClassName("bardropdown-content");
+	    var i;
+	    for (i = 0; i < dropdowns.length; i++) {
+	      var openDropdown = dropdowns[i];
+	      if (openDropdown.classList.contains('barshow')) {
+	        openDropdown.classList.remove('barshow');
+	      }
+	    }
+	  }
+	}
+
+	</script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<div id="frontpage" class="näkymä">
+				<header>
+					<div>
+						<a href="vetykampanja.html">	
+							<img id="header-logo" class="header-element" src="header-logo.png" alt="header-logo">
+						</a>
+					</div>
+					<ul id="somepalkki" class="header-element">
+						<li class="some-item">
+							<a href="https://www.youtube.com/">
+								<img id="youtube-logo" class="some-logo" src="youtube-square-brands.svg" alt="youtube-logo">
+							</a>
+						</li>
+						<li class="some-item">
+							<a href="https://twitter.com/?lang=en">
+								<img id="twitter-logo" class="some-logo" src="twitter-square-brands.svg" alt="twitter-logo">
+							</a>
+						</li>
+						<li class="some-item">
+							<a href="https://www.facebook.com/">
+								<img id="facebook-logo" class="some-logo" src="facebook-square-brands.svg" alt="facebook-logo">
+							</a>
+						</li>
+						<li class="some-item">
+							<a href="https://www.instagram.com/">
+								<img id="instagram-logo" class="some-logo" src="instagram-brands.svg" alt="instagram-logo">
+							</a>
+						</li>
+					</ul>
+					<div id="bars-holder">
+						<a onclick="dropDownFunction()" class="dropbtn">
+						<img id="bars-solid" src="bars-solid.svg" class="header-element">
+				  			<div class="dropdown">
+			 					<ul id="myDropdown" class="dropdown-content">
+			   					<!-- <li><a href="#home">Mikä on vetytalous?</a></li> -->
+									<li><a href="kansalaisaloite.html">Kansalaisaloite</a></li>
+			   						<li><a href="#Osallistu">Osallistu</a></li>
+			   					<!-- <li><a href="#home">Tietoa</a></li> -->
+		   						<!-- <li><a href="#about">Uutiset</a></li> -->
+			   						<li><a href="#Yritysyhteistyö">Kumppanit</a></li>
+		   						<!-- <li><a href="#contact">Usein kysyttyä</a></li> -->
+			   						<li><a href="#footer">Yhteistiedot</a></li>
+								</ul>
+							</div>
+						</a>
+					</div>
+				</header>
+				<nav id="navigation-bar" class="header-element">
+					<ul class="mainnav">
+			  			<li class="menu-item"><a href="#Osallistu">Osallistu</a></li>
+			 	 		<li class="menu-item"><a href="#Lahjoita">Lahjoita</a></li>
+			  			<li class="menu-item"><a href="#Yritysyhteistyö">Yritysyhteistyö</a></li>
+				  		<li class="menu-item"><a href="h2kyydit.html">H<sub>2</sub>-kyydit</a></li>
+				  		<li class="menu-item"><a href="kansalaisaloite.html">Kansalaisaloite</a></li>
+					</ul>
+				</nav>
+				<div id="logo-holder">
+					<div class="hero-wrapper">
+						<img id="H2-logo" src="H2-logo.png" alt="H2-logo">
+						<h1 id="logo-text">Entä jos ainoa päästömme olisikin vesi?</h1>
+					</div>
+				</div>
+			</div>
+			<!---- 
+			<div id="vetyesittely" class="näkymä">Mistä vetyä sitten saa?</div>	
+			----->
+				<div id="Osallistu" class="näkymä">
+					<br><br>
+					<video poster="h2-logo-video.png" controls>
+  						<source src="vetyvideo.mp4" type="video/mp4">
+   						<source src="vetyvideo.ogv" type="video/ogv">
+  						<source src="vetyvideo.webm" type="video/webm">
+					</video>
+					<p>Download Video:
+						Closed Format:	<a href="vetyvideo.mp4">MP4</a>
+						Open Format:	<a href="vetyvideo.ogv">OGV</a>
+					</p>
+				</div>
+
+				<div id="Lahjoita" class="näkymä">
+					<br><br>
+					<h1>Lahjoita</h1>
+					<div id="Lahjoita">
+						<a href=""></a>	
+					</div>
+				</div>
+
+				<div id="Kansalaisaloite" class="näkymä">
+					<br><br>
+					<h1>Kansalaisaloite</h1>
+					<div id="Lahjoita">
+						<a href=""></a>	
+					</div>
+				</div>
+
+				<div id="Lahjoita" class="näkymä">
+					<br><br>
+					<h1>Kansalaisaloite</h1>
+					<div id="Lahjoita">
+						<a href=""></a>	
+					</div>
+				</div>
+
+				<div id="H2-kyydit" class="näkymä">
+					<br><br>
+					<h1>H<sub style="color: white">2</sub>-kyydit</h1>
+					<div id="Lahjoita">
+						<a href=""></a>	
+					</div>
+				</div>
+
+				<div id="Yritysyhteistyö" class="näkymä">
+					<br><br>
+					<h1>Kumppaniksi?</h1>
+					<div id="Lahjoita">
+						<a href=""></a>	
+					</div>
+				</div>
+			<footer id="footer">
+					<div class="footer-element" id="yhteystiedot">
+						<br>
+						<br>
+						<h3>Yhteystiedot:</h3>
+						<p>
+							<br>
+							H<sub style="color: white;">2</sub>-kampanja
+							<br>
+							Fredrikinkatu 22 A 22
+							<br>
+							00222 Helsinki
+							<br>
+							<br>
+							joao.hamalainen@aalto.fi
+							<br>
+							+358442420666
+							<br>
+							<br>
+						</p>
+						<br>
+					</div>
+					<div class="footer-element">
+						<img id="H2-logo-footer" src="H2-logo.png" alt="H2-logo">
+						<img id="woikoski-logo" src="woikoski-logo.png" alt="woikoski-logo">
+					</div>
+					<br>
+					<br>
+			</footer>
+		</div>
+	</body>
+	</html>
