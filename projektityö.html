@@ -1,0 +1,109 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>projektityö</title>
+  <meta name="description" content="projektityö">
+  <meta name="author1" content="Joao Hämäläinen">
+  <meta name="author2" content="Anni Laser">
+
+  <script type="text/javascript">
+
+    class Palvelu {
+      constructor() {
+        this.klista = [];
+        this.vlista = [];
+      }
+    }
+
+    class Käyttäjä {
+      constructor(nimi) {
+        this.nimi = nimi;
+        this.klista = [];
+        this.vlista = [];
+        this.kuva = 
+      }
+    }
+
+    class Viesti {
+      constructor(lahet, vast, viest) {
+        this.lahettaja = lahet;
+        this.vastaanottaja = vast;
+        this.viesti = viest;
+        this.tykkäykset = 0;
+      }
+    }
+
+    class Kuva {
+      constructor() {
+        this.saateviesti = new saateviesti()
+      }
+    }
+
+    class saateviesti {
+      constructor(teksti) {
+        this.teksti = teksti
+      }
+    }
+
+/*****************************
+  Globaaleja muuttujia
+*****************************/
+
+    var viestipankki = []
+    var kuvapankki = []
+
+    var palvelu = new Palvelu();
+
+/*****************************
+  Funktiot
+*****************************/
+
+  //Random funkito välitlä min - max
+    function getRndInteger(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+
+    function jaaKuva() {
+
+    }
+
+    function tykkäykset() {
+
+    }
+
+
+
+/*************************************
+Projektityön   omalta  verkkosivulta   (ja/tai  itse  Demosta)   pitää   käydä  ilmi  
+seuraavat asiat:
+o Palvelun  idea
+o Ohjeet  käyttäjälle,  ts. miten palvelua  käytetään
+*************************************/
+
+/*************************************
+Palvelusta  pitää voida tallentaa viestit tms.  Localstorageen  JSON-stringinä, 
+niin, että  uudelleenlatauksen  yhteydessä  viestit eivät häviä näkyvistä.  On  
+vielä parempi,  jos tallennus toimii  pilvessä  (esim.  Myjson.com)
+*************************************/
+
+/*************************************
+nähdä kaverit,  lisätä  kavereita itselleen,  
+lähettää   viesti,   nähdä   saapuneet   viestit jne.  Lisäksi   voit  keksiä  itse  uusia   ja 
+kokeellisia toimintoja.
+*************************************/
+
+  
+  </script>
+</head>
+
+<body onload="">
+  <p id="kaverilista"></p>
+  <button onclick="testausFunktio_1()" onclick="style">Kokeile lähettää viesti</button>
+  <p id="viestiketju"></p>
+
+</body>
+</html>
