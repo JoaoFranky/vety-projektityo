@@ -97,7 +97,7 @@ header {
 
 .some-logo {
 	height: 40px;
-	/*	filter: invert(100%);*/
+	filter: invert(100%);
 }
 
 #somepalkki>li {
@@ -665,54 +665,4 @@ by Anni Laser
   margin-top: 0%;
   text-align: center;
   width: 100%;
-}
-
-.sendphotobtn {
-  background-color: white;
-  color: black;
-width: 1px;
-padding: 50px 5px;
-  margin: 10% 10%;
-  border: none;
-  cursor: pointer;
-  width: 80%;
-  font-family: 'Roboto Slab', serif;
-  font-size: 25px;
-  border-radius: 15px;
-    text-align: center;
-}
-
-
-/*
-********
-Jako-popupin muotoilu
-by Anni Laser
-********
-*/
-
-.header-element-plus {
-	padding: 20px;
-    text-align: center;
-}
-
-#jakopalkki>li {
-	float: left;
-	padding-top: 10px;
-	padding-right: 15px;
-	padding-left: 20px;
-}
-
-#jakopalkki {
-	list-style: none;
-	float: right;
-	text-align: center;
-	display: none;
-	padding-right: 25px;
-}
-
-.centeredimage{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
 }
