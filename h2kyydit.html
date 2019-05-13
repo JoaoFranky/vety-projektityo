@@ -223,6 +223,7 @@
         }
       } 
 
+
   /*************************************
     Modal Login form (Third Party Code)
     "https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal"
@@ -235,6 +236,7 @@
           modal2.style.display = "none";
       }
   }
+
       console.log(gridElementLista)
       console.log(tulokset)
       console.log(tulokset[0])
@@ -300,7 +302,6 @@
       function jaaKuvaSomessa(id) {
 
       }
-
   /*************************************
     Navigation Bar DropDown menu
   *************************************/
@@ -480,19 +481,24 @@
           </div>
         </div>
 
-        <button class = "sharebtn" onclick="document.getElementById('id02').style.display='block'"  > <IMG SRC="share-square-solid.svg" WIDTH=20 alt="share"> </button>
+        <button class = "sharebtn" onclick="document.getElementById('id02').style.display='block'"  >
+          <IMG SRC="share-square-solid.svg" WIDTH=20 alt="share">
+        </button>
 
         <div id="id02" class="modal">  
+
           <form class="modal-content animate" action="/action_page.php">
             <div class="imgcontainer">
               <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
             <div class="container">
               <img class=centeredimage SRC="5vetykyydit.png" WIDTH=200 alt="kuva1">
+
               <label for="for"><b><br><br>Mitä mietit?</b></label>
               <input id="nimi" type="text" placeholder="#vetykampanja rokkaa..." name="caption" required>
-              <p>Jaa palvelussa</p>
+               <p>Jaa palvelussa</p>
             </div>
+            
             <div class="container" style="background-color:#f1f1f1">
               <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
               <ul id="somepalkki" class="header-element-plus">
