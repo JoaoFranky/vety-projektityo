@@ -64,20 +64,30 @@
         }
       }
 
-      /*********************************
+    /*********************************
       Class gridElement on ns. container kuvalle,
       koostuu div:istä, jossa kuva ja alapalkki.
       Alapalkissa tykkäys-, ja jakonappulat.
 
-      *********************************/
-
+    *********************************/
       class gridElement {
         constructor(kuva) {
           this.kuva = kuva;
           this.tykkaykset = 0;
           this.ID = "";
+          this.liked = false;
         }
       }
+
+  /*****************************
+    LocalStorage
+  *****************************/
+
+    //LocalStorage.getItem("avain", JSON.stringify(var -olio))
+
+    //JSON.parse()
+
+   // JSON.parseInt()
 
   /*****************************
     Globaaleja muuttujia
@@ -85,7 +95,6 @@
 
       var kayttaja = null;
       var viestipankki = [];
-      var gridElementTykkays = [];
 
       //Kaikki kuvat
       var kuvapankki = ["1vetykyydit.png",
@@ -111,13 +120,6 @@
                             "Punkaharju.jpg",
                             "woikoski-logo.jpg"];
 
-      var julkaisuKuvat = [];
-
-      var palvelu = new Palvelu();
-
-      var uploadImage = "";
-
-
       /**  KOLMANNE OSAPUOLEN KOODIA 
         Lähde: https://ourcodeworld.com/articles/read/278/how-to-split-an-array-into-chunks-of-the-same-size-easily-in-javascript
 
@@ -128,61 +130,39 @@
       */
       
       function chunkArray(myArray, chunk_size) {
-          var index = 0;
-          var arrayLength = myArray.length;
-          var tempArray = [];
+        var index = 0;
+        var arrayLength = myArray.length;
+        var tempArray = [];
           
-          for (index = 0; index < arrayLength; index += chunk_size) {
-              myChunk = myArray.slice(index, index+chunk_size);
-              // Do something if you want with the group
-              tempArray.push(myChunk);
-          }
-
-          return tempArray;
+        for (index = 0; index < arrayLength; index += chunk_size) {
+            myChunk = myArray.slice(index, index+chunk_size);
+            // Do something if you want with the group
+            tempArray.push(myChunk);
+        }
+        return tempArray;
       }
 
-      // Split in group of 3 items
-      var result = chunkArray([1,2,3,4,5,6,7,8], 3);
-      // Outputs : [ [1,2,3] , [4,5,6] ,[7,8] ]
-      //console.log(result);
+      /*****************************
+        Onload funktiot
+      *****************************/
 
+        var gridElementLista = [];
+        var tulos = "";
 
-  /*****************************
-    Onload funktiot
-  *****************************/
-
-      //Missä järjestyksessä kuvat laitetaan???
-      /****************************
-        - Luodaan gridElementit
-          - 
-        - Annetaan niille kuvat
-        - Laitetaan ne html:ään
-
-      "<div class='gridElement'>" +
-                "<img class='picture' src=" + kuvapankki[k] + ">" +
-                  "<div class='banner'>" +
-                    "<button class='heartbtn'>" +
-                      "<img src='heart-regular.svg'>" +
-                    "</button>" +
-                    "<button class='sharebtn'>" +
-                      "<img src='share-square-solid.svg'>" +
-                    "</button>" +
-                  "</div>" +
-                "</div>"
-
-      ****************************/
-
-      var gridElementLista = [];
-      var tulos = "";
-
-      function lataaGrid() {
+        function lataaGrid() {
 
       /*****************************
         luodaan gridElementOlit
-      *****************************/        
+      *****************************/
+
+        var tykkaykset = [35, 2, 26, 120,
+                          49, 98, 86, 72,
+                          79, 59, 34, 12,
+                          110, 222, 32, 42]
+
         for (var k = 0; k < kuvapankki.length; k++) {
           var uusiGridElement = new gridElement(kuvapankki[k])
-          uusiGridElement.tykkaykset = getRndInteger(10, 120)  //Random amount of likes
+          uusiGridElement.tykkaykset = tykkaykset[k]  //Random amount of likes
           uusiGridElement.ID = k
           gridElementLista.push(uusiGridElement)
         }
@@ -198,8 +178,6 @@
         
         var columns = chunkArray(gridElementLista, numberItemsInColumn)
 
-        console.log(columns)
-
       /*****************************
         Se mitä spämmätään html:llään
       *****************************/
@@ -208,48 +186,41 @@
 
       for (var x = 0; x < columns.length; x++) {
         for (var k = 0; k < columns[x].length; k++) {
-          tulokset[x] +=  "<div id='" + columns[x][k].kuva + "' class='gridElement'>" +
-                            "<img class='picture' src=" + columns[x][k].kuva + ">" +
+
+          //The exact location of GridElement
+          var y = columns[x][k]
+          tulokset[x] +=  "<div id='" + y.kuva + "' class='gridElement'>" +
+                            "<img class='picture' src=" + y.kuva + ">" +
                             "<div class='banner'>" +
-                              "<a class='bannerElement heartbtn' onclick='tykkaaSydan(" + columns[x][k].ID + ")' type='button'>" + //Heart needs to change, according toID Try making ID string instead of actual numbers
-                                "<img id='" + columns[x][k].ID + "heart'" + " src='heart-regular.svg'>" +
+                              "<a class='bannerElement heartbtn' onclick='tykkaaSydan(" + y.ID + ")' type='button'>" +
+                                "<img id='" + y.ID + "heart' src='heart-regular.svg'>" +
                               "</a>" +
-                              "<p class='bannerElement likes'>" + columns[x][k].tykkaykset + "</p>" +
-                              "<a class='bannerElement sharebtn' onclick='jaaKuvaSomessa(" + columns[x][k].ID + ")' type='button'>" +
-                                "<img src='share-square-solid.svg'>" + //Ponnahtaa esille form, jossa somelogot (Annin logo)
+                              "<p id='" + y.ID + "likes' class='bannerElement likes'>" + y.tykkaykset + "</p>" +
+                              "<a class='bannerElement sharebtn' onclick='jaaKuvaSomessa(" + y.ID + ")' type='button'>" +
+                                "<img src='share-square-solid.svg'>" + 
                               "</a>" +
                             "</div>" +
                           "</div>"
         }
       } 
 
-
-  /*************************************
-    Modal Login form (Third Party Code)
-    "https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal"
-  *************************************/
-  // Get the modal
-  var modal2 = document.getElementById('id02');
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-      if (event.target == modal2) {
+      /*************************************
+        Modal Login form (Third Party Code)
+        "https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal"
+      *************************************/
+      // Get the modal
+      var modal2 = document.getElementById('id02');
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal2) {
           modal2.style.display = "none";
+        }
       }
-  }
 
-      console.log(gridElementLista)
-      console.log(tulokset)
-      console.log(tulokset[0])
-      console.log(tulokset[1])
-      console.log(tulokset[2])
-      console.log(tulokset[3])
-
-        //<input type='image' src='heart-regular.svg' name='saveForm' class='heartbtn' id='heart'/>
-
-        document.getElementById('column1').innerHTML = tulokset[0];
-        document.getElementById('column2').innerHTML = tulokset[1];
-        document.getElementById('column3').innerHTML = tulokset[2];
-        document.getElementById('column4').innerHTML = tulokset[3];
+      document.getElementById('column1').innerHTML = tulokset[0];
+      document.getElementById('column2').innerHTML = tulokset[1];
+      document.getElementById('column3').innerHTML = tulokset[2];
+      document.getElementById('column4').innerHTML = tulokset[3];
 
       }
 
@@ -263,45 +234,45 @@
       }
 
       function uusiKayttaja() {
-         kayttaja = new Kayttaja(document.getElementById('nimi').value)
-         kayttaja.meili = document.getElementById('meili').value
-         kayttaja.kuva = document.getElementById('uploadimg').src
-         julkaisuKuvat.push(kayttaja.kuva)
-         console.log(kayttaja.kuva)
-      }
-
-      function lisaaKuvapankkiin() {
-
-      }
-
-      function jaaKuva() {
-
-      }
-
-      function tykkäykset() {
-
+        kayttaja = new Kayttaja(document.getElementById('nimi').value)
+        kayttaja.meili = document.getElementById('meili').value
+        kayttaja.kuva = document.getElementById('uploadimg').src
+        julkaisuKuvat.push(kayttaja.kuva)
+        console.log(kayttaja.kuva)
       }
 
       function vaihdaKuva() {
         //Valitsee satunnaisen kuvan valmiista kuvapankista
         var randomPicture = kuvapankki[getRndInteger(0, kuvapankki.length)];
         document.getElementById('uploadimg').src = randomPicture;
-        document.getElementById('uploadimg').style.width = '100%'
+        document.getElementById('uploadimg').style.width = '100%';
       }
 
       function tykkaaSydan(id) {
         //Tyhjä sydän -> täysi sydän -> tyhjä sydän...
-        var image = document.getElementById(this.id);
+        //Lisää tykkäyksen määrää numerona
+        var image = document.getElementById(id + 'heart');
+        var numbr = document.getElementById(id + 'likes');
+        var nextNumbr = gridElementLista[id].tykkaykset
+        
         if (image.src.match("heart-regular.svg")) {
           image.src = "heart-solid.svg";
+          gridElementLista[id].tykkaykset++;
+          nextNumbr++;
+
         } else {
           image.src = "heart-regular.svg";
+          gridElementLista[id].tykkaykset--;
+          nextNumbr--;
         }
+          document.getElementById(id + 'likes').innerHTML = nextNumbr
       }
 
       function jaaKuvaSomessa(id) {
-
+        document.getElementById('id02').style.display = 'block'
+        document.getElementById('centeredImage').src = gridElementLista[id].kuva
       }
+
   /*************************************
     Navigation Bar DropDown menu
   *************************************/
@@ -326,7 +297,7 @@
       }
     }
 
-      /* When the user clicks on the button, 
+    /* When the user clicks on the button, 
     toggle between hiding and showing the dropdown content */
     function barDropDownFunction() {
       document.getElementById("barmyDropdown").classList.toggle("barshow");
@@ -346,23 +317,22 @@
       }
     }
 
+    /*************************************
+      Modal Login form (Third Party Code)
+      "https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal"
+    *************************************/
 
-  /*************************************
-    Modal Login form (Third Party Code)
-    "https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal"
-  *************************************/
+    // Get the modal
+    var modal = document.getElementById('id01');
 
-  // Get the modal
-  var modal = document.getElementById('id01');
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
       if (event.target == modal) {
           modal.style.display = "none";
       }
-  }
+    }
 
-    </script>
+  </script>
   </head>
   <body onload="lataaGrid()">
     <div class="wrapper">
@@ -457,7 +427,7 @@
               <input id="nimi" type="text" placeholder="#vetykampanja rokkaa..." name="caption" required>
               <label for="e-mail"><b>sähköposti</b></label>
               <input id="meili" type="email" placeholder="matti@meikäläinen.com" name="e-mail" oninvalid="this.setCustomValidity('Please, enter a valid e-mail')"
-                  oninput="this.setCustomValidity('')" required>  
+                oninput="this.setCustomValidity('')" required>  
               <button class="modalbtn" onclick="document.getElementById('id01').style.display='none'" type="submit">Lataa kuvasi!</button>
               <label>
               <input type="checkbox" checked="checked" name="remember"> Lisätkää minut postilistaan!
@@ -481,24 +451,20 @@
           </div>
         </div>
 
-        <button class = "sharebtn" onclick="document.getElementById('id02').style.display='block'"  >
-          <IMG SRC="share-square-solid.svg" WIDTH=20 alt="share">
-        </button>
-
+        <!--------------
+          Jakonappula gridElementeissä
+        --------------->
         <div id="id02" class="modal">  
-
           <form class="modal-content animate" action="/action_page.php">
             <div class="imgcontainer">
               <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
             <div class="container">
-              <img class=centeredimage SRC="5vetykyydit.png" WIDTH=200 alt="kuva1">
-
+              <img id="centeredImage" class=centeredimage SRC="5vetykyydit.png" WIDTH=200 alt="kuva1">
               <label for="for"><b><br><br>Mitä mietit?</b></label>
               <input id="nimi" type="text" placeholder="#vetykampanja rokkaa..." name="caption" required>
-               <p>Jaa palvelussa</p>
+              <p>Jaa palvelussa</p>
             </div>
-            
             <div class="container" style="background-color:#f1f1f1">
               <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
               <ul id="somepalkki" class="header-element-plus">
