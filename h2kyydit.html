@@ -14,6 +14,25 @@
 
     <script type="text/javascript">
 
+        /*************************************
+  Projektityön   omalta  verkkosivulta   (ja/tai  itse  Demosta)   pitää   käydä  ilmi  
+  seuraavat asiat:
+  o Palvelun  idea
+  o Ohjeet  käyttäjälle,  ts. miten palvelua  käytetään
+  *************************************/
+
+  /*************************************
+  Palvelusta  pitää voida tallentaa viestit tms.  Localstorageen  JSON-stringinä, 
+  niin, että  uudelleenlatauksen  yhteydessä  viestit eivät häviä näkyvistä.  On  
+  vielä parempi,  jos tallennus toimii  pilvessä  (esim.  Myjson.com)
+  *************************************/
+
+  /*************************************
+  nähdä kaverit,  lisätä  kavereita itselleen,  
+  lähettää   viesti,   nähdä   saapuneet   viestit jne.  Lisäksi   voit  keksiä  itse  uusia   ja 
+  kokeellisia toimintoja.
+  *************************************/
+
       class Palvelu {
         constructor() {
           this.kayttajalista = [];
@@ -205,6 +224,20 @@
         }
       } 
 
+
+  /*************************************
+    Modal Login form (Third Party Code)
+    "https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal"
+  *************************************/
+  // Get the modal
+  var modal2 = document.getElementById('id02');
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal2) {
+          modal2.style.display = "none";
+      }
+  }
+
       console.log(tulokset)
       console.log(tulokset[0])
       console.log(tulokset[1])
@@ -265,25 +298,6 @@
           image.src = "heart-regular.svg";
         }
       }
-
-  /*************************************
-  Projektityön   omalta  verkkosivulta   (ja/tai  itse  Demosta)   pitää   käydä  ilmi  
-  seuraavat asiat:
-  o Palvelun  idea
-  o Ohjeet  käyttäjälle,  ts. miten palvelua  käytetään
-  *************************************/
-
-  /*************************************
-  Palvelusta  pitää voida tallentaa viestit tms.  Localstorageen  JSON-stringinä, 
-  niin, että  uudelleenlatauksen  yhteydessä  viestit eivät häviä näkyvistä.  On  
-  vielä parempi,  jos tallennus toimii  pilvessä  (esim.  Myjson.com)
-  *************************************/
-
-  /*************************************
-  nähdä kaverit,  lisätä  kavereita itselleen,  
-  lähettää   viesti,   nähdä   saapuneet   viestit jne.  Lisäksi   voit  keksiä  itse  uusia   ja 
-  kokeellisia toimintoja.
-  *************************************/
 
   /*************************************
     Navigation Bar DropDown menu
@@ -462,6 +476,43 @@
           </div>
           <div class="column" id="column4">
           </div>
+        </div>
+
+        <button class = "sharebtn" onclick="document.getElementById('id02').style.display='block'"  > <IMG SRC="share-square-solid.svg" WIDTH=20 alt="share"> </button>
+        <div id="id02" class="modal">  
+
+          <form class="modal-content animate" action="/action_page.php">
+            <div class="imgcontainer">
+              <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+            </div>
+            <div class="container">
+              <img class=centeredimage SRC="5vetykyydit.png" WIDTH=200 alt="kuva1">
+              </button>
+              <label for="for"><b><br><br>Mitä mietit?</b></label>
+              <input id="nimi" type="text" placeholder="#vetykampanja rokkaa..." name="caption" required>
+               <p>Jaa palvelussa</p>
+            </div>
+            <div class="container" style="background-color:#f1f1f1">
+              <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+              <ul id="somepalkki" class="header-element-plus">
+            <li>
+              <a href="https://twitter.com/?lang=en">
+                <img id="twitter-logo" class="some-logo" src="b_twitter-square-brands.svg" alt="twitter-logo">
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/">
+                <img id="facebook-logo" class="some-logo" src="b_facebook-square-brands.svg" alt="facebook-logo">
+              </a>
+            </li>
+            <li >
+              <a href="https://www.instagram.com/">
+                <img id="instagram-logo" class="some-logo" src="b_instagram-brands.svg" alt="instagram-logo">
+              </a>
+            </li>
+                </ul>
+            </div>  
+          </form>
         </div>
       </div>
     </div>
