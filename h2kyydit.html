@@ -75,7 +75,6 @@
         constructor(kuva) {
           this.kuva = kuva;
           this.tykkaykset = 0;
-          this.jakoNappi = null;
           this.ID = "";
         }
       }
@@ -145,7 +144,7 @@
       // Split in group of 3 items
       var result = chunkArray([1,2,3,4,5,6,7,8], 3);
       // Outputs : [ [1,2,3] , [4,5,6] ,[7,8] ]
-      console.log(result);
+      //console.log(result);
 
 
   /*****************************
@@ -212,11 +211,11 @@
           tulokset[x] +=  "<div id='" + columns[x][k].kuva + "' class='gridElement'>" +
                             "<img class='picture' src=" + columns[x][k].kuva + ">" +
                             "<div class='banner'>" +
-                              "<a class='bannerElement heartbtn' onclick='tykkaaSydan(" + columns[x][k].ID + ")' type='button'>" + //Heart needs to change, according toID
+                              "<a class='bannerElement heartbtn' onclick='tykkaaSydan(" + columns[x][k].ID + ")' type='button'>" + //Heart needs to change, according toID Try making ID string instead of actual numbers
                                 "<img id='" + columns[x][k].ID + "heart'" + " src='heart-regular.svg'>" +
                               "</a>" +
                               "<p class='bannerElement likes'>" + columns[x][k].tykkaykset + "</p>" +
-                              "<a class='bannerElement sharebtn' type='button'>" +
+                              "<a class='bannerElement sharebtn' onclick='jaaKuvaSomessa(" + columns[x][k].ID + ")' type='button'>" +
                                 "<img src='share-square-solid.svg'>" + //Ponnahtaa esille form, jossa somelogot (Annin logo)
                               "</a>" +
                             "</div>" +
@@ -238,6 +237,7 @@
       }
   }
 
+      console.log(gridElementLista)
       console.log(tulokset)
       console.log(tulokset[0])
       console.log(tulokset[1])
@@ -299,6 +299,9 @@
         }
       }
 
+      function jaaKuvaSomessa(id) {
+
+      }
   /*************************************
     Navigation Bar DropDown menu
   *************************************/
@@ -478,7 +481,10 @@
           </div>
         </div>
 
-        <button class = "sharebtn" onclick="document.getElementById('id02').style.display='block'"  > <IMG SRC="share-square-solid.svg" WIDTH=20 alt="share"> </button>
+        <button class = "sharebtn" onclick="document.getElementById('id02').style.display='block'"  >
+          <IMG SRC="share-square-solid.svg" WIDTH=20 alt="share">
+        </button>
+
         <div id="id02" class="modal">  
 
           <form class="modal-content animate" action="/action_page.php">
@@ -487,30 +493,31 @@
             </div>
             <div class="container">
               <img class=centeredimage SRC="5vetykyydit.png" WIDTH=200 alt="kuva1">
-              </button>
+
               <label for="for"><b><br><br>Mitä mietit?</b></label>
               <input id="nimi" type="text" placeholder="#vetykampanja rokkaa..." name="caption" required>
                <p>Jaa palvelussa</p>
             </div>
+            
             <div class="container" style="background-color:#f1f1f1">
               <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
               <ul id="somepalkki" class="header-element-plus">
-            <li>
-              <a href="https://twitter.com/?lang=en">
-                <img id="twitter-logo" class="some-logo" src="b_twitter-square-brands.svg" alt="twitter-logo">
-              </a>
-            </li>
-            <li>
-              <a href="https://www.facebook.com/">
-                <img id="facebook-logo" class="some-logo" src="b_facebook-square-brands.svg" alt="facebook-logo">
-              </a>
-            </li>
-            <li >
-              <a href="https://www.instagram.com/">
-                <img id="instagram-logo" class="some-logo" src="b_instagram-brands.svg" alt="instagram-logo">
-              </a>
-            </li>
-                </ul>
+                <li>
+                  <a href="https://twitter.com/?lang=en">
+                    <img id="twitter-logo" class="some-logo" src="b_twitter-square-brands.svg" alt="twitter-logo">
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.facebook.com/">
+                    <img id="facebook-logo" class="some-logo" src="b_facebook-square-brands.svg" alt="facebook-logo">
+                  </a>
+                </li>
+                <li >
+                  <a href="https://www.instagram.com/">
+                    <img id="instagram-logo" class="some-logo" src="b_instagram-brands.svg" alt="instagram-logo">
+                  </a>
+                </li>
+              </ul>
             </div>  
           </form>
         </div>
