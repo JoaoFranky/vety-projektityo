@@ -78,14 +78,14 @@
                         "6vetykyydit.png",
                         "7vetykyydit.png",
                         "8vetykyydit.png",
-                        "1vetykyydit copy.png",
-                        "2vetykyydit copy.png",
-                        "3vetykyydit copy.png",
-                        "4vetykyydit copy.png",
-                        "5vetykyydit copy.png",
-                        "6vetykyydit copy.png",
-                        "7vetykyydit copy.png",
-                        "8vetykyydit copy.png",];
+                        "1vetykyyditcopy.png",
+                        "2vetykyyditcopy.png",
+                        "3vetykyyditcopy.png",
+                        "4vetykyyditcopy.png",
+                        "5vetykyyditcopy.png",
+                        "6vetykyyditcopy.png",
+                        "7vetykyyditcopy.png",
+                        "8vetykyyditcopy.png",];
 
       var extraKuvapankki = ["Hydro_Man_1_.jpeg",
                             "youtube-square-brands.svg",
@@ -186,34 +186,37 @@
         Se mitä spämmätään html:llään
       *****************************/
 
-      var tulos1 = "";
-      var tulos2 = "";
-      var tulos3 = "";
-      var tulos4 = "";
+      var tulokset = ["", "", "", ""]
 
       for (var x = 0; x < columns.length; x++) {
         for (var k = 0; k < columns[x].length; k++) {
-          tulos +=  "<div id='" + gridElementLista[k].kuva + "' class='gridElement'>" +
-                      "<img class='picture' src=" + gridElementLista[k].kuva + ">" +
-                      "<div class='banner'>" +
-                        "<a class='bannerElement heartbtn' onclick='tykkaaSydan(" + gridElementLista[k].ID + ")' type='button'>" +
-                          "<img id='" + gridElementLista[k].kuva.ID + "heart'" + " src='heart-regular.svg'>" +
-                        "</a>" +
-                        "<p class='bannerElement likes'>" + gridElementLista[k].tykkaykset + "</p>" +
-                        "<a class='bannerElement sharebtn' type='button'>" +
-                          "<img src='share-square-solid.svg'>" + //Ponnahtaa esille form, jossa somelogot
-                        "</a>" +
-                      "</div>" +
-                    "</div>"
+          tulokset[x] +=  "<div id='" + columns[x][k].kuva + "' class='gridElement'>" +
+                            "<img class='picture' src=" + columns[x][k].kuva + ">" +
+                            "<div class='banner'>" +
+                              "<a class='bannerElement heartbtn' onclick='tykkaaSydan(" + columns[x][k].ID + ")' type='button'>" + //Heart needs to change, according toID
+                                "<img id='" + columns[x][k].ID + "heart'" + " src='heart-regular.svg'>" +
+                              "</a>" +
+                              "<p class='bannerElement likes'>" + columns[x][k].tykkaykset + "</p>" +
+                              "<a class='bannerElement sharebtn' type='button'>" +
+                                "<img src='share-square-solid.svg'>" + //Ponnahtaa esille form, jossa somelogot (Annin logo)
+                              "</a>" +
+                            "</div>" +
+                          "</div>"
         }
       } 
 
+      console.log(tulokset)
+      console.log(tulokset[0])
+      console.log(tulokset[1])
+      console.log(tulokset[2])
+      console.log(tulokset[3])
+
         //<input type='image' src='heart-regular.svg' name='saveForm' class='heartbtn' id='heart'/>
 
-        document.getElementById('column1').innerHTML = tulos1;
-        document.getElementById('column2').innerHTML = tulos2;
-        document.getElementById('column3').innerHTML = tulos3;
-        document.getElementById('column4').innerHTML = tulos4;
+        document.getElementById('column1').innerHTML = tulokset[0];
+        document.getElementById('column2').innerHTML = tulokset[1];
+        document.getElementById('column3').innerHTML = tulokset[2];
+        document.getElementById('column4').innerHTML = tulokset[3];
 
       }
 
@@ -341,21 +344,7 @@
           modal.style.display = "none";
       }
   }
-  /*************************************
-    Modal Pop Up form (Third Party Code)
-    "https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal"
-  *************************************/
-      //Edited by AnniLaser_______________
-  // Get the modal
-  var modal2 = document.getElementById('id02');
 
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-      if (event.target == modal2) {
-          modal2.style.display = "none";
-      }
-  }
-   //Edited by AnniLaser_______________
     </script>
   </head>
   <body onload="lataaGrid()">
@@ -476,44 +465,5 @@
         </div>
       </div>
     </div>
-
-        <div>
-        <!--________________POPUP_vol_2_SANDBOX-->
-          <button class = "sharebtn" onclick="document.getElementById('id02').style.display='block'"  > <IMG SRC="share-square-solid.svg.png" WIDTH=20 alt="share"> </button>
-        <div id="id02" class="modal">   
-          <form class="modal-content animate" action="/action_page.php">
-            <div class="imgcontainer">
-              <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-            </div>
-            <div class="container">
-              <img class=centeredimage SRC="5vetykyydit.png" WIDTH=200 alt="kuva1">
-              </button>
-              <label for="for"><b><br><br>Mitä mietit?</b></label>
-              <input id="nimi" type="text" placeholder="#vetykampanja rokkaa..." name="caption" required>
-               <p>Jaa palvelussa</p>
-            <ul id="somepalkki" class="header-element-plus">
-            <li>
-              <a href="https://twitter.com/?lang=en">
-                <img id="twitter-logo" class="some-logo" src="b_twitter-square-brands.svg" alt="twitter-logo">
-              </a>
-            </li>
-            <li>
-              <a href="https://www.facebook.com/">
-                <img id="facebook-logo" class="some-logo" src="b_facebook-square-brands.svg" alt="facebook-logo">
-              </a>
-            </li>
-            <li >
-              <a href="https://www.instagram.com/">
-                <img id="instagram-logo" class="some-logo" src="b_instagram-brands.svg" alt="instagram-logo">
-              </a>
-            </li>
-                </ul>
-            </div>
-            <div class="container" style="background-color:#f1f1f1">
-              <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-            </div>  
-          </form>
-        </div>
-        </div>
   </body>
   </html>
