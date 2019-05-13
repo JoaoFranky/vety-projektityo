@@ -28,6 +28,7 @@
           this.viestilista = [];
           this.kuva = "";
           this.meili = "";
+          this.postilista = true;
         }
       }
 
@@ -56,6 +57,7 @@
           this.kuva = kuva;
           this.tykkaykset = 0;
           this.jakoNappi = null;
+          this.ID = "";
         }
       }
 
@@ -76,7 +78,14 @@
                         "6vetykyydit.png",
                         "7vetykyydit.png",
                         "8vetykyydit.png",
-                        "9vetykyydit.png"];
+                        "1vetykyydit copy.png",
+                        "2vetykyydit copy.png",
+                        "3vetykyydit copy.png",
+                        "4vetykyydit copy.png",
+                        "5vetykyydit copy.png",
+                        "6vetykyydit copy.png",
+                        "7vetykyydit copy.png",
+                        "8vetykyydit copy.png",];
 
       var extraKuvapankki = ["Hydro_Man_1_.jpeg",
                             "youtube-square-brands.svg",
@@ -89,6 +98,36 @@
       var palvelu = new Palvelu();
 
       var uploadImage = "";
+
+
+      /**  KOLMANNE OSAPUOLEN KOODIA 
+        Lähde: https://ourcodeworld.com/articles/read/278/how-to-split-an-array-into-chunks-of-the-same-size-easily-in-javascript
+
+      * Returns an array with arrays of the given size.
+      *
+      * @param myArray {Array} array to split
+      * @param chunk_size {Integer} Size of every group
+      */
+      
+      function chunkArray(myArray, chunk_size) {
+          var index = 0;
+          var arrayLength = myArray.length;
+          var tempArray = [];
+          
+          for (index = 0; index < arrayLength; index += chunk_size) {
+              myChunk = myArray.slice(index, index+chunk_size);
+              // Do something if you want with the group
+              tempArray.push(myChunk);
+          }
+
+          return tempArray;
+      }
+
+      // Split in group of 3 items
+      var result = chunkArray([1,2,3,4,5,6,7,8], 3);
+      // Outputs : [ [1,2,3] , [4,5,6] ,[7,8] ]
+      console.log(result);
+
 
   /*****************************
     Onload funktiot
@@ -125,40 +164,56 @@
       *****************************/        
         for (var k = 0; k < kuvapankki.length; k++) {
           var uusiGridElement = new gridElement(kuvapankki[k])
-          uusiGridElement.tykkaykset = getRndInteger(10, 380)  //Random amount of likes
+          uusiGridElement.tykkaykset = getRndInteger(10, 120)  //Random amount of likes
+          uusiGridElement.ID = k
           gridElementLista.push(uusiGridElement)
         }
 
+        console.log(gridElementLista)
+
+      /*****************************
+        Division into 4 COLUMNS-ARRAYS
+      *****************************/ 
+
+      //Jaetaan julkaistujen kuvien määrä 4:llä (maksimi pylväsmäärällä), jotta menisi kutakuikin tasan columneissa
+        var numberItemsInColumn = Math.floor(gridElementLista.length/4);
+        
+        var columns = chunkArray(gridElementLista, numberItemsInColumn)
+
+        console.log(columns)
+
       /*****************************
         Se mitä spämmätään html:llään
-      *****************************/   
+      *****************************/
 
-        //Jaetaan julkaistujen kuvien määrä 4:llä (maksimi pylväsmäärällä), jotta menisi kutakuikin tasan
-        var numberItemsInColumn = Math.floor(gridElementLista.length/4);
+      var tulos1 = "";
+      var tulos2 = "";
+      var tulos3 = "";
+      var tulos4 = "";
 
-        console.log(numberItemsInColumn)
-
-        for (var k = 0; k < numberItemsInColumn; k++) {
+      for (var x = 0; x < columns.length; x++) {
+        for (var k = 0; k < columns[x].length; k++) {
           tulos +=  "<div id='" + gridElementLista[k].kuva + "' class='gridElement'>" +
                       "<img class='picture' src=" + gridElementLista[k].kuva + ">" +
                       "<div class='banner'>" +
-                        "<a class='heartbtn' onclick='vaihdaSydan()' type='button'>" +   //Muuttaa sydämen kuvan olion ID:n (kuva-stringing) mukaan.
-                          "<img id='heart' src='heart-regular.svg'>" +
+                        "<a class='bannerElement heartbtn' onclick='tykkaaSydan(" + gridElementLista[k].ID + ")' type='button'>" +
+                          "<img id='" + gridElementLista[k].kuva.ID + "heart'" + " src='heart-regular.svg'>" +
                         "</a>" +
-                        //"<p>" + gridElementLista[k].tykkaykset "</p>" +
-                        "<a class='sharebtn' type='button'>" +
+                        "<p class='bannerElement likes'>" + gridElementLista[k].tykkaykset + "</p>" +
+                        "<a class='bannerElement sharebtn' type='button'>" +
                           "<img src='share-square-solid.svg'>" + //Ponnahtaa esille form, jossa somelogot
                         "</a>" +
                       "</div>" +
                     "</div>"
         }
+      } 
 
         //<input type='image' src='heart-regular.svg' name='saveForm' class='heartbtn' id='heart'/>
 
-        document.getElementById('column1').innerHTML = tulos;
-        document.getElementById('column2').innerHTML = tulos;
-        document.getElementById('column3').innerHTML = tulos;
-        document.getElementById('column4').innerHTML = tulos;
+        document.getElementById('column1').innerHTML = tulos1;
+        document.getElementById('column2').innerHTML = tulos2;
+        document.getElementById('column3').innerHTML = tulos3;
+        document.getElementById('column4').innerHTML = tulos4;
 
       }
 
@@ -198,9 +253,9 @@
         document.getElementById('uploadimg').style.width = '100%'
       }
 
-      function vaihdaSydan() {
-        //Tyhjä sydän -> täysi sydän
-        var image = document.getElementById('heart');
+      function tykkaaSydan(id) {
+        //Tyhjä sydän -> täysi sydän -> tyhjä sydän...
+        var image = document.getElementById(this.id);
         if (image.src.match("heart-regular.svg")) {
           image.src = "heart-solid.svg";
         } else {
@@ -357,18 +412,20 @@
         <!--________________ANNIN MUUTOKSET_________________-->
         <div class ="logoboksi"></div>
         <div class = "leipis">
-          <p class = "selostus"> Tule mukaan kyytiin vetyautossa julkkiksen kanssa! Osallistu kuvakilpailuun #vetykampanja -hashtagillä. Äänestetyin kuva voittaa paikan kyydistäH2-kyydit lorem ipsum <br> vieraana julkkiksia <br> lataa kuvasi #vetykampanja-aihetunnisteella ja jaa se soisaalisen median kanavissasi! Eniten tykkäyksiä saaneen kuvan lähettäjä palkitaan: pääset mukaan Vetykyytiin kuukauden vieraan kanssa. Toukokuussa vieraana on Jasper Pääkkönen, joka ... lyhyt esittely... <br><br></p>
+          <p class = "selostus">H2-kampanja taistelee puhtaamman energian puolesta; ratkaisunamme vety! Haluaisitko oppia siitä lisää ja olla mukana vaikuttamassa?
+                                <br>Kuvaamme videoita vetyautossa, jossa mukana sinun lisäksi haastateltava on ympäristövaikuttavia julkkiksia sekä vetynalan asiantuntijoita.
+                                <br>Osallistuminen on helppoa! Ota vetyaiheinen ataa kuvasi #vetykampanja-aihetunnisteella ja jaa se soisaalisen median kanavissasi! Eniten tykkäyksiä saanut palkitaan: pääset mukaan vetyajelulle!</p>
 
         <!-----------------------------
             Modal Login Form (Third Party Code)
             "https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal"
           ------------------------------->
 
-        <h2 class ="osallistu">Osallistu kilpailuun ja lataa kuvasi! Äänestä suosikkiasi ja kutsu kaveritkin mukaan!<h2>
+        <h2 class ="osallistu">Osallistu kilpailuun lataamalla kuva! Käytä meidän #h2 -häshtägiä<h2>
         </div>
-        <button class = "sendphotobtn" onclick="document.getElementById('id01').style.display='block'">Lataa Kuva</button>
+        <button class = "sendphotobtn" onclick="document.getElementById('id01').style.display='block'">Lataa kuva</button>
         <div id="id01" class="modal">   
-          <form class="modal-content animate" action="/action_page.php">
+          <form class="modal-content animate" action="h2kyydit.html">
             <div class="imgcontainer">
               <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
@@ -376,14 +433,14 @@
               <button class="modalbtn" class="uploadbtn" onclick="vaihdaKuva()" type="button">
                 <img id="uploadimg" src="upload.icon.png">
               </button>
-              <label for="for"><b>Kirjoita kuvateksti</b></label>
+              <label for="for"><b>Kirjoita kuvateksti!</b></label>
               <input id="nimi" type="text" placeholder="#vetykampanja rokkaa..." name="caption" required>
               <label for="e-mail"><b>sähköposti</b></label>
               <input id="meili" type="email" placeholder="matti@meikäläinen.com" name="e-mail" oninvalid="this.setCustomValidity('Please, enter a valid e-mail')"
                   oninput="this.setCustomValidity('')" required>  
-              <button class="modalbtn" onclick="uusiKayttaja()" onclick="document.getElementById('id01').style.display='none'" type="submit">Lataa kuvasi!</button>
+              <button class="modalbtn" onclick="document.getElementById('id01').style.display='none'" type="submit">Lataa kuvasi!</button>
               <label>
-              <input type="checkbox" checked="checked" name="remember">Lisätkää minut postilistaan!
+              <input type="checkbox" checked="checked" name="remember"> Lisätkää minut postilistaan!
               </label>
             </div>
             <div class="container" style="background-color:#f1f1f1">
