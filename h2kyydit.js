@@ -46,6 +46,8 @@
           this.tykkaykset = 0;
           this.ID = "";
           this.liked = false;
+          this.email = "";
+          this.viesti = "moi...";
         }
       }
 
@@ -124,25 +126,32 @@
 
         function lataaGrid() {
 
+
+//yritetään ladata aiemmin tallennettu gridi local storagesta
+        if (localStorage.getItem('gridElementLista')) {
+            gridElementLista = JSON.parse(localStorage.getItem('gridElementLista'))
+            console.log("JSON ladattu LocalStoragesta:")
+            console.log(gridElementLista)
+        } else {
+
       /*****************************
-        luodaan gridElementOlit
+       ellei onnistu, luodaan uudet gridElementit
       *****************************/
 
         var tykkaykset = [35, 2, 26, 120,
                           49, 98, 86, 72,
                           79, 59, 34, 12,
                           110, 222, 32, 42]
-
-        //let tykkaykset
-
-       // if (localStorage.getItem)(gridElementLista) {
         
           for (var k = 0; k < kuvapankki.length; k++) {
             var uusiGridElement = new gridElement(kuvapankki[k])
             uusiGridElement.tykkaykset = tykkaykset[k]  //Random amount of likes
             uusiGridElement.ID = k
             gridElementLista.push(uusiGridElement)
-          }
+          } 
+        localStorage.setItem('gridElementLista', JSON.stringify(gridElementLista))
+        console.log(localStorage.getItem('gridElementLista'))
+        }
 
       /*****************************
         Division into 4 COLUMNS-ARRAYS
@@ -197,16 +206,6 @@
         document.getElementById('column3').innerHTML = tulokset[2];
         document.getElementById('column4').innerHTML = tulokset[3];
 
-      for (var x = 0; x < gridElementLista.length; x++) {
-
-        // var e = localStorage.setItem(gridElementLista[x].ID, gridElementLista[x].tykkaykset)
-
-        gridElementLista[x].tykkaykset = localStorage.getItem(gridElementLista[x].ID)
-
-      }
-
-      console.log(localStorage.getItem(4))
-      console.log(localStorage.getItem(15))
     }
 
   /*****************************
@@ -225,11 +224,40 @@
         julkaisuKuvat.push(kayttaja.kuva)
       }
 
+var kuvaindeksi //globaali muuttuja
       function vaihdaKuva() {
         //Valitsee satunnaisen kuvan valmiista kuvapankista
-        var randomPicture = kuvapankki[getRndInteger(0, kuvapankki.length)];
+        kuvaindeksi = getRndInteger(0, kuvapankki.length);
+        var randomPicture = kuvapankki[kuvaindeksi];
         document.getElementById('uploadimg').src = randomPicture;
         document.getElementById('uploadimg').style.width = '100%';
+      }
+
+      // ###################
+      // ###################
+      // lähettää kuvan, ja lisää vastaavan GridElementin tietoineen GridElementListaan
+      // ###################
+      // ###################
+
+      function lahetaKuva() {
+        var uusiGridElement = new gridElement(kuvapankki[kuvaindeksi])
+        uusiGridElement.kuva = kuvapankki[kuvaindeksi]
+        uusiGridElement.tykkaykset = 0
+        uusiGridElement.ID = gridElementLista.lenght
+        uusiGridElement.viesti = document.getElementById("nimi").value;
+        uusiGridElement.email = document.getElementById("meili").value;
+        gridElementLista.push(uusiGridElement)
+          
+        localStorage.setItem('gridElementLista', JSON.stringify(gridElementLista))
+        console.log(localStorage.getItem('gridElementLista'))
+        gridElementLista = JSON.parse(localStorage.getItem('gridElementLista'))
+        console.log("Kuva lisatty listaan gridElementLista ja paivitetty LocalStorageen");
+        console.log(gridElementLista);
+
+        //resettaa lähetyslomakkeen arvot
+        document.getElementById("nimi").value = ""
+        uusiGridElement.email = document.getElementById("meili").value = ""
+        kuvaindeksi = getRndInteger(0, kuvapankki.length)
       }
 
       function tykkaaSydan(id) {
@@ -248,12 +276,11 @@
           gridElementLista[id].tykkaykset--;
           nextNumbr--;
         }
+
           document.getElementById(id + 'likes').innerHTML = nextNumbr
 
-        for (var x = 0; x < gridElementLista.length; x++) {
-          localStorage.clear
-          var e = localStorage.setItem(gridElementLista[x].ID, nextNumbr)
-        }
+          // päivittää tykkäyksen JSONiin
+          localStorage.setItem('gridElementLista', JSON.stringify(gridElementLista))
       }
 
 
@@ -308,18 +335,22 @@
         }
       }
     }
+  /*************************************
+    Modal Login form (Third Party Code)
+    "https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal"
+  *************************************/
 
-    /*************************************
-      Modal Login form (Third Party Code)
-      "https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal"
-    *************************************/
+  // Get the modal
+  var modal = document.getElementById('id01');
 
-    // Get the modal
-    var modal = document.getElementById('id01');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
       if (event.target == modal) {
           modal.style.display = "none";
       }
-    }
+  }
+
+function tyhjenna(){
+    localStorage.clear()
+  console.log("LocalStorage tyhjennetty")
+}
