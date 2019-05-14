@@ -583,8 +583,8 @@ body {
     margin: 390px 20% 0% 20%;
     padding: 300px;
   }
-
-  #anni-H2-logo {
+  
+ #anni-H2-logo {
   width: 4000px;
   margin-top: 10px;
   }
@@ -718,7 +718,7 @@ by Anni Laser
 }
 
 #some-palkki {
-    float: left;
+  float: left;
   padding-top: 10px;
   padding-right: 15px;
   padding-left: 20px;

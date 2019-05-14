@@ -126,6 +126,7 @@
 
         function lataaGrid() {
 
+
 //yritetään ladata aiemmin tallennettu gridi local storagesta
         if (localStorage.getItem('gridElementLista')) {
             gridElementLista = JSON.parse(localStorage.getItem('gridElementLista'))
@@ -141,8 +142,6 @@
                           49, 98, 86, 72,
                           79, 59, 34, 12,
                           110, 222, 32, 42]
-
-
         
           for (var k = 0; k < kuvapankki.length; k++) {
             var uusiGridElement = new gridElement(kuvapankki[k])
@@ -207,7 +206,6 @@
         document.getElementById('column3').innerHTML = tulokset[2];
         document.getElementById('column4').innerHTML = tulokset[3];
 
-
     }
 
   /*****************************
@@ -225,7 +223,6 @@
         kayttaja.kuva = document.getElementById('uploadimg').src
         julkaisuKuvat.push(kayttaja.kuva)
       }
-
 
 var kuvaindeksi //globaali muuttuja
       function vaihdaKuva() {
@@ -263,7 +260,6 @@ var kuvaindeksi //globaali muuttuja
         kuvaindeksi = getRndInteger(0, kuvapankki.length)
       }
 
-
       function tykkaaSydan(id) {
         //Tyhjä sydän -> täysi sydän -> tyhjä sydän...
         //Lisää tykkäyksen määrää numerona
@@ -285,8 +281,6 @@ var kuvaindeksi //globaali muuttuja
 
           // päivittää tykkäyksen JSONiin
           localStorage.setItem('gridElementLista', JSON.stringify(gridElementLista))
-
-
       }
 
 
@@ -296,7 +290,6 @@ var kuvaindeksi //globaali muuttuja
       function jaaKuvaSomessa(id) {
         document.getElementById('id02').style.display = 'block'
         document.getElementById('centeredImage').src = gridElementLista[id].kuva
- 
       }
 
   /*************************************
@@ -342,7 +335,6 @@ var kuvaindeksi //globaali muuttuja
         }
       }
     }
-
   /*************************************
     Modal Login form (Third Party Code)
     "https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form_modal"
