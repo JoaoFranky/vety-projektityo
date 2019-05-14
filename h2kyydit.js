@@ -227,7 +227,7 @@
       }
 
 
-var kuvaindeksi
+var kuvaindeksi //globaali muuttuja
       function vaihdaKuva() {
         //Valitsee satunnaisen kuvan valmiista kuvapankista
         kuvaindeksi = getRndInteger(0, kuvapankki.length);
@@ -244,6 +244,7 @@ var kuvaindeksi
 
       function lahetaKuva() {
         var uusiGridElement = new gridElement(kuvapankki[kuvaindeksi])
+        uusiGridElement.kuva = kuvapankki[kuvaindeksi]
         uusiGridElement.tykkaykset = 0
         uusiGridElement.ID = gridElementLista.lenght
         uusiGridElement.viesti = document.getElementById("nimi").value;
@@ -252,6 +253,7 @@ var kuvaindeksi
           
         localStorage.setItem('gridElementLista', JSON.stringify(gridElementLista))
         console.log(localStorage.getItem('gridElementLista'))
+        gridElementLista = JSON.parse(localStorage.getItem('gridElementLista'))
         console.log("Kuva lisatty listaan gridElementLista ja paivitetty LocalStorageen");
         console.log(gridElementLista);
 
