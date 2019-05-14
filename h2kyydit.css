@@ -24,23 +24,24 @@ html {
 }
 
 body {
-  	width: 100%;
+  width: 100%;
 	height: 100%;
 	padding: 0;
-    margin: 0;
-	background: url(finland-hd.jpg) no-repeat fixed;
+  margin: 0;
+	/*background: url(finland-hd.jpg) no-repeat fixed;
+  background-color: rgba(0, 0, 0, 0.4);*/
 	background-image: width: 100%;
  	background-size: cover;
- 	background-color: rgba(0, 0, 0, 0.4);
-    background-blend-mode: darken;
+  background-color: #CAD6FC;
+  background-blend-mode: darken;
 }
 
 .wrapper {
 	width: 100%;
 	height: 100%;
 	padding:0;
-    margin:0;
-    z-index: 10
+  margin:0;
+  z-index: 2;
 }
 
 #teksti {
@@ -74,7 +75,7 @@ body {
 header {
 	width: 100%;
 	height: 70px;
-	background-color: #8BB42D;
+	background-color: #00C4FB;
 	position: top;
 	margin: 0px 0px 0px 0px;
 }
@@ -84,14 +85,14 @@ header {
 }
 
 #header-logo {
-	color: white;
-	float: left;
-	height: 50px;
-	padding-top: 10px;
-	padding-left: 10px;
-	position: relative;
-	z-index: 1;
-	filter: invert(100%);
+  color: white;
+  float: left;
+  height: 65px;
+  padding-top: 10px;
+  padding-left: 10px;
+  position: relative;
+  z-index: 1;
+  filter: invert(100%);
 }
 
 .some-logo {
@@ -115,11 +116,11 @@ header {
 }
 
 #bars-solid {
-	height: 40px;
+	height: 60px;
 	padding-top: 15px;
 	padding-right: 15px;
 	float: right;
-	z-index: 10;
+	z-index: 2;
 	filter: invert(100%);
 }
 
@@ -210,7 +211,7 @@ ul.mainnav {
 }
 
 .mainnav>li>a>h4 {
-	color: lightgrey;	
+	color: black;	
 }
 
 .mainnav a,
@@ -241,14 +242,7 @@ ul.mainnav {
 	display: flex;
 	align-content: center;
 	justify-content: center;
-	flex-direction: column;
 	height: calc(100% - 70px);
-}
-
-#H2-logo {
-	width: 50%;
-	z-index: 1;
-	vertical-align: middle;
 }
 
 #logo-text {
@@ -273,7 +267,7 @@ ul.mainnav {
 
 
 /******************************
-	Toinen näkymä
+	Footer
 ******************************/
 #footerdiv {
 	width: 100%;
@@ -308,9 +302,8 @@ input[type=text], input[type=password] {
 }
 
 /* Set a style for all buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
+.modalbtn {
+  background-color: #8FBAFF;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
@@ -318,8 +311,18 @@ button {
   width: 100%;
 }
 
-button:hover {
+button: hover {
   opacity: 0.8;
+}
+
+
+.uploadbtn {
+  background-color: white;
+}
+
+#uploadimg {
+  text-align: center;
+  width: 50px;
 }
 
 /* Extra styles for the cancel button */
@@ -343,7 +346,7 @@ img.avatar {
 
 .container {
   padding: 16px;
-  
+
 }
 
 span.psw {
@@ -384,8 +387,8 @@ span.psw {
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close: hover,
+.close: focus {
   color: red;
   cursor: pointer;
 }
@@ -418,7 +421,126 @@ span.psw {
 }
 
 /******************************
-	Desktop Screen
+	Fotogrid-hommeli
+******************************/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+.header {
+  text-align: center;
+  padding: 32px;
+}
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+
+  .likes {
+    font-size: 40px;
+    margin: 8px;
+    margin-top: 7px;
+  }
+
+  .banner {
+    width: 100%;
+    height: 100px;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+
+  .likes {
+    font-size: 60px;
+    margin-top: 50px;
+  }
+}
+
+/******************************
+  GridElements
+******************************/
+
+.gridElement {
+  background-color: white;
+  padding: 4px;
+  border: 3px;
+  margin: 5px;
+  margin-bottom: 30px;
+  border: 2px;
+}
+
+.picture {
+  width: 100%;
+}
+
+.banner {
+  width: 100%;
+  height: 50px;
+}
+
+.bannerElement {
+  width: 22%
+}
+
+
+.banner>a>img {
+  color: red;
+}
+
+.heartbtn {
+  float: left;
+  color: white;
+}
+
+.sharebtn {
+  float: right;
+}
+
+.likes {
+  float: left;
+  font-size: 30px;
+  margin: 5px;
+  margin-top: 15px;
+}
+
+/******************************
+	Desktop Screen version
 ******************************/
 
 
@@ -457,8 +579,155 @@ span.psw {
 		height: calc(100% - 140px);
 	}
 
+  .logoboksi {
+    margin: 390px 20% 0% 20%;
+    padding: 300px;
+  }
 
+  #anni-H2-logo {
+  width: 4000px;
+  margin-top: 10px;
+  }
 
+  .container {
+  }
+
+  .modal-content {
+    width: 50%;
+  }
+  
 }
 
 
+/*
+********
+Kilpailu-näkymän tyylittely
+by Anni Laser
+********
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
+
+.selostus {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20 px;
+    text-align: left;
+/*    text-align: justify;*/
+}
+
+.osallistu {
+    text-align: left;
+    color: black;
+    text-shadow: -0px 0 black, 0 0px black, 0px 0 black, 0 -0px black;
+}
+
+.leipis {
+    margin: 50px;
+}
+
+.logoboksi {
+  margin: 30px 20% 0% 20%;
+  background: #00C4FB;
+  border-radius: 15px;
+  padding: 100px;
+  text-align: center;
+}
+
+
+#anni-H2-logo {
+  z-index: 1;
+  vertical-align: middle;
+  text-align: center;
+  width: 210px;
+  margin-top: 10px;
+  }
+
+.sendphotobtn {
+  background-color: white;
+  color: black;
+  width: 1px;
+  padding: 50px 5px;
+  margin: 10% 10%;
+  border: none;
+  cursor: pointer;
+  width: 80%;
+  font-family: 'Roboto Slab', serif;
+  font-size: 25px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+  .menu-item {
+    color: black;
+  }
+
+.hero-wrapper {
+  margin-top: 0%;
+  text-align: center;
+  width: 100%;
+}
+
+
+.sendphotobtn {
+  background-color: white;
+  color: black;
+  width: 1px;
+  padding: 50px 5px;
+  margin: 10% 10%;
+  border: none;
+  cursor: pointer;
+  width: 80%;
+  font-family: 'Roboto Slab', serif;
+  font-size: 25px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+#jakopalkki>li {
+  float: left;
+  padding-top: 10px;
+  padding-right: 15px;
+  padding-left: 20px;
+}
+
+#jakopalkki {
+  list-style: none;
+  float: right;
+  text-align: center;
+  display: none;
+  padding-right: 25px;
+}
+
+.centeredimage{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.somelogo {
+    height: 40px;
+}
+
+#some-palkki {
+  list-style: none;
+  float: right;
+  text-align: center;
+  display: none;
+  padding-right: 25px;
+}
+
+#some-palkki {
+    float: left;
+  padding-top: 10px;
+  padding-right: 15px;
+  padding-left: 20px;
+}
+
+.sendbtn {
+  width: 75%;
+  padding: 10px 18px;
+  background-color: #8FBAFF;
+  text-align: center;
+  float: right;
+}
