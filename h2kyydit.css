@@ -683,11 +683,6 @@ by Anni Laser
   text-align: center;
 }
 
-.header-element-plus {
-  padding: 20px;
-    text-align: center;
-}
-
 #jakopalkki>li {
   float: left;
   padding-top: 10px;
@@ -708,4 +703,23 @@ by Anni Laser
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.somelogo {
+    height: 40px;
+}
+
+#some-palkki {
+  list-style: none;
+  float: right;
+  text-align: center;
+  display: none;
+  padding-right: 25px;
+}
+
+#some-palkki {
+    float: left;
+  padding-top: 10px;
+  padding-right: 15px;
+  padding-left: 20px;
 }
