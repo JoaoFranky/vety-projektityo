@@ -22,31 +22,16 @@
       class Palvelu {
         constructor() {
           this.kayttajalista = [];
-          this.viestilista = [];
+          this.gridElements = [];
         }
       }
 
       class Kayttaja {  
-        constructor(nimi) {
-          this.nimi = nimi;
-          this.kuvalista = [];
-          this.viestilista = [];
+        constructor() {
+          this.saateViesti = [];
           this.kuva = "";
           this.meili = "";
           this.postilista = true;
-        }
-      }
-
-      class Kuva {
-        constructor(url) {
-          this.kuva = url;
-          this.saateviesti = new Saateviesti();
-        }
-      }
-
-      class Saateviesti {
-        constructor(teksti) {
-          this.teksti = teksti
         }
       }
 
@@ -54,7 +39,6 @@
       Class gridElement on ns. container kuvalle,
       koostuu div:istä, jossa kuva ja alapalkki.
       Alapalkissa tykkäys-, ja jakonappulat.
-
     *********************************/
       class gridElement {
         constructor(kuva) {
@@ -68,6 +52,10 @@
   /*****************************
     LocalStorage
   *****************************/
+
+  //    - tallentaa tykkäykset
+  //    - Käyttäjän ladattu kuva, eli gridElement
+  //    - Käyttäjätiedot
 
     //LocalStorage.getItem("avain", JSON.stringify(var -olio))
 
@@ -133,7 +121,6 @@
       *****************************/
 
         var gridElementLista = [];
-        var tulos = "";
 
         function lataaGrid() {
 
@@ -146,14 +133,16 @@
                           79, 59, 34, 12,
                           110, 222, 32, 42]
 
-        for (var k = 0; k < kuvapankki.length; k++) {
-          var uusiGridElement = new gridElement(kuvapankki[k])
-          uusiGridElement.tykkaykset = tykkaykset[k]  //Random amount of likes
-          uusiGridElement.ID = k
-          gridElementLista.push(uusiGridElement)
-        }
+        //let tykkaykset
 
-        console.log(gridElementLista)
+       // if (localStorage.getItem)(gridElementLista) {
+        
+          for (var k = 0; k < kuvapankki.length; k++) {
+            var uusiGridElement = new gridElement(kuvapankki[k])
+            uusiGridElement.tykkaykset = tykkaykset[k]  //Random amount of likes
+            uusiGridElement.ID = k
+            gridElementLista.push(uusiGridElement)
+          }
 
       /*****************************
         Division into 4 COLUMNS-ARRAYS
@@ -203,12 +192,22 @@
         }
       }
 
-      document.getElementById('column1').innerHTML = tulokset[0];
-      document.getElementById('column2').innerHTML = tulokset[1];
-      document.getElementById('column3').innerHTML = tulokset[2];
-      document.getElementById('column4').innerHTML = tulokset[3];
+        document.getElementById('column1').innerHTML = tulokset[0];
+        document.getElementById('column2').innerHTML = tulokset[1];
+        document.getElementById('column3').innerHTML = tulokset[2];
+        document.getElementById('column4').innerHTML = tulokset[3];
+
+      for (var x = 0; x < gridElementLista.length; x++) {
+
+        // var e = localStorage.setItem(gridElementLista[x].ID, gridElementLista[x].tykkaykset)
+
+        gridElementLista[x].tykkaykset = localStorage.getItem(gridElementLista[x].ID)
 
       }
+
+      console.log(localStorage.getItem(4))
+      console.log(localStorage.getItem(15))
+    }
 
   /*****************************
     Muut funktiot
@@ -224,7 +223,6 @@
         kayttaja.meili = document.getElementById('meili').value
         kayttaja.kuva = document.getElementById('uploadimg').src
         julkaisuKuvat.push(kayttaja.kuva)
-        console.log(kayttaja.kuva)
       }
 
       function vaihdaKuva() {
@@ -239,20 +237,28 @@
         //Lisää tykkäyksen määrää numerona
         var image = document.getElementById(id + 'heart');
         var numbr = document.getElementById(id + 'likes');
-        var nextNumbr = gridElementLista[id].tykkaykset
+        var nextNumbr = gridElementLista[id].tykkaykset;
 
         if (image.src.match("heart-regular.svg")) {
           image.src = "heart-solid.svg";
           gridElementLista[id].tykkaykset++;
           nextNumbr++;
-
         } else {
           image.src = "heart-regular.svg";
           gridElementLista[id].tykkaykset--;
           nextNumbr--;
         }
           document.getElementById(id + 'likes').innerHTML = nextNumbr
+
+        for (var x = 0; x < gridElementLista.length; x++) {
+          localStorage.clear
+          var e = localStorage.setItem(gridElementLista[x].ID, nextNumbr)
+        }
       }
+
+
+       // console.log(gridElementLista)
+        // console.log(JSON.stringify(gridElementLista))
 
       function jaaKuvaSomessa(id) {
         document.getElementById('id02').style.display = 'block'
